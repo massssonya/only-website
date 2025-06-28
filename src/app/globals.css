@@ -49,8 +49,12 @@ body {
 	@apply focus:outline-none focus:ring-0 focus:ring-offset-0;
 }
 
-.h1 {
+.h1,
+.h2,
+.h3 {
+	font-family: var(--font-tt-commons);
 	font-size: 1.5rem;
+	font-weight: 700;
 }
 
 .button {

@@ -1,10 +1,13 @@
-import { CreateKeepForm } from "@/features/create-keep-form";
-
+import { CreateNoteForm } from "@/features/create-note-form/ui";
+import { NotesContainer } from "@/features/notes-container";
 
 export default function Home() {
 	return (
 		<main className="relative w-full">
-			<CreateKeepForm className="absolute left-1/2 -translate-x-1/2" />
+			<div className="container flex flex-col gap-4 mx-auto">
+				<CreateNoteForm className="self-center" />
+				<NotesContainer />
+			</div>
 		</main>
 	);
 }
