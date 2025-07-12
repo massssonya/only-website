@@ -7,15 +7,10 @@ import {
 	Bell,
 	Smile
 } from "@geist-ui/icons";
-
-export interface INote {
-	id: string;
-	header?: string;
-	text: string;
-}
+import type { Note } from "@/shared/types/note";
 
 type Props = {
-	note: INote;
+	note: Note;
 	className?: string;
 };
 

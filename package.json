@@ -6,16 +6,24 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "api": "npx openapi-typescript ./src/shared/api/schema/main.yaml -o ./src/shared/api/schema/generated.ts"
   },
   "dependencies": {
     "@geist-ui/icons": "^1.0.2",
     "@next/font": "^14.2.15",
     "@tailwindcss/postcss": "^4.1.10",
+    "@tanstack/react-query": "^5.81.5",
     "clsx": "^2.1.1",
+    "msw": "^2.10.3",
     "next": "15.3.4",
+    "openapi-fetch": "^0.14.0",
+    "openapi-msw": "^1.2.0",
+    "openapi-react-query": "^0.5.0",
+    "openapi-typescript": "^7.8.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "uuid": "^11.1.0",
     "zod": "^3.25.67",
     "zustand": "^5.0.5"
   },
