@@ -2,7 +2,7 @@
 
 import { CreateNoteInput } from "./create-note-input";
 import { CreateNoteTextarea } from "./create-note-textarea";
-import { useCreateKeep } from "../model";
+import { useCreateNote } from "../model";
 import clsx from "clsx";
 
 export function CreateNoteForm({ className }: { className?: string }) {
@@ -14,7 +14,7 @@ export function CreateNoteForm({ className }: { className?: string }) {
 		textareaValue,
 		handleSubmit,
 		focusedInsideForm
-	} = useCreateKeep();
+	} = useCreateNote();
 
 	return (
 		<form
@@ -28,7 +28,7 @@ export function CreateNoteForm({ className }: { className?: string }) {
 			onBlur={formActions.blur}
 		>
 			<CreateNoteInput
-				ref={refs.inputRef}
+				ref={refs.headerRef}
 				onKeyDown={inputActions.keydown}
 				className={focusedInsideForm ? "h-12 py-2" : "h-[0px] opacity-0"}
 			/>
