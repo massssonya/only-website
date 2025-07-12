@@ -1,15 +1,18 @@
 "use client";
 
+import { createNote } from "@/shared/api/notes";
+import { useNoteCache } from "@/shared/api/query/use-note-cache";
 import { useAutoResizeTextarea } from "@/shared/hooks";
+import { useMutation } from "@tanstack/react-query";
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
-export function useCreateKeep() {
+export function useCreateNote() {
 	const [textareaValue, setTextareaValue] = useState("");
 	const [focusedInsideForm, setIsFocusedInsideForm] = useState(false);
 	const blurTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	const formRef = useRef<HTMLFormElement>(null);
-	const inputRef = useRef<HTMLInputElement>(null);
+	const headerRef = useRef<HTMLInputElement>(null);
 	const textareaRef = useAutoResizeTextarea(textareaValue);
 
 	const textareaActions = {
@@ -42,16 +45,31 @@ export function useCreateKeep() {
 				setIsFocusedInsideForm(false);
 				handleSubmit();
 			}, 100);
+		},
+		reset: () => {
+			setTextareaValue("");
+			if (headerRef.current) {
+				headerRef.current.value = "";
+			}
 		}
 	};
 
-	const handleSubmit = () => {
-		const title = inputRef.current?.value.trim();
-		const note = textareaRef.current?.value.trim();
-		if (note) {
-			console.log({ title, note });
+	const { invalidateNotes } = useNoteCache();
+
+	const createMutation = useMutation({
+		mutationFn: createNote,
+		onSuccess: () => {
+			invalidateNotes();
+			formActions.reset();
 		}
-		setTextareaValue("");
+	});
+
+	const handleSubmit = () => {
+		const header = headerRef.current?.value.trim();
+		const text = textareaRef.current?.value.trim();
+		if (text) {
+			createMutation.mutate({ text, header });
+		}
 	};
 
 	useEffect(() => {
@@ -65,7 +83,7 @@ export function useCreateKeep() {
 	return {
 		refs: {
 			formRef,
-			inputRef,
+			headerRef,
 			textareaRef
 		},
 		textareaActions,
