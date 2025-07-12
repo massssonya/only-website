@@ -1,4 +1,4 @@
-import { deleteNote } from "@/shared/api/notes";
+import { deleteNoteById } from "@/shared/api/notes";
 import { getNote, updateNote } from "@/shared/lib/data/mockNotes";
 import { NextResponse } from "next/server";
 
@@ -19,7 +19,7 @@ export async function PUT(req: Request, { params }: Params) {
 }
 
 export async function DELETE(_: Request, { params }: Params) {
-  const deleted = deleteNote(params.id);
+  const deleted = deleteNoteById(params.id);
   if (!deleted) return NextResponse.json({ error: "Not found" }, { status: 404 });
   return NextResponse.json(deleted);
 }
