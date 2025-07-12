@@ -22,9 +22,10 @@ export async function createNote(data: Omit<Note, "id">): Promise<Note> {
 	return res.json();
 }
 
-export async function deleteNote(id: Note["id"]): Promise<void> {
-	const res = await fetch(`/api/notes/${id}`, {
+export async function deleteNoteById(id: Note["id"]): Promise<void> {
+	const res = await fetch(`/api/notes`, {
 		method: "DELETE",
+		body: JSON.stringify({ id }),
 	});
 	if (!res.ok) {
 		throw new Error("Failed to delete note");
