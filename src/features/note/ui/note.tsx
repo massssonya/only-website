@@ -5,7 +5,8 @@ import {
 	Image,
 	UserPlus,
 	Bell,
-	Smile
+	Smile,
+	Pin
 } from "@geist-ui/icons";
 import type { Note } from "@/shared/types/note";
 import { useDeleteNote } from "../model";
@@ -30,10 +31,16 @@ export function Note({ note, className }: Props) {
 		<div
 			tabIndex={0}
 			className={clsx(
-				"bg-white border border-gray-300 rounded-xl px-4 py-3 hover:shadow-md hover:border-white transition-all duration-300 ease-in-out group",
+				"bg-white border border-gray-300 rounded-xl px-4 py-3 hover:shadow-md hover:border-white transition-all duration-300 ease-in-out group relative",
 				className
 			)}
 		>
+			<Pin
+				className="absolute top-2 right-2 button-hover opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity duration-300 ease-in-out group-focus:opacity-100"
+				onClick={() => {
+					console.log("pin");
+				}}
+			/>
 			{note.header && (
 				<h3 className="text-xl font-semibold mb-2">{note.header}</h3>
 			)}
@@ -45,7 +52,6 @@ export function Note({ note, className }: Props) {
 				<UserPlus className="button-hover" />
 				<Image className="button-hover" />
 				<Archive className="button-hover" />
-				{/* <MoreVertical className="button-hover" /> */}
 				<DropdownMenu trigger={<MoreVertical className="button-hover" />}>
 					{items.map((item, index) => (
 						<button
