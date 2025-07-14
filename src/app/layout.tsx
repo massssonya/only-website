@@ -20,7 +20,7 @@ export default function RootLayout({
 			<body className="font-base h-screen">
 				<Providers>
 					<Header />
-					<div className="w-full h-full flex absolute top-16">
+					<div className="w-full h-[calc(100vh-4rem)] flex absolute top-16">
 						<Sidebar />
 						<div className="w-full h-full overflow-scroll px-4 py-3">
 							{children}
