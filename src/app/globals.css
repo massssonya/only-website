@@ -57,8 +57,12 @@ body {
 	font-weight: 700;
 }
 
-.button {
+/* .button {
 	@apply lowercase no-underline bg-white text-black px-16 py-6 rounded-2xl font-[ttruns] font-medium text-sm hover:rounded-4xl hover:shadow-lg duration-300;
+} */
+
+.button {
+	@apply cursor-pointer lowercase no-underline bg-white text-black px-4 py-3 rounded-2xl font-[ttruns] font-medium text-sm hover:rounded-4xl hover:shadow-lg duration-300;
 }
 
 @media (min-width: 375px) {
