@@ -8,12 +8,12 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 export function NotesContainer({ className }: { className?: string }) {
-	const pathname = usePathname()
-	const isDeleted = pathname === ROUTES.DELETED.path
+	const pathname = usePathname();
+	const isDeleted = pathname === ROUTES.DELETED.path;
 	const { data: notes } = useQuery({
-		queryKey: [pathname],
+		queryKey: ["notes", isDeleted ? "deleted" : "all"],
 		queryFn: isDeleted ? fetchDeletedNotes : fetchNotes
-	})
+	});
 	return (
 		<div
 			className={clsx(
@@ -22,7 +22,10 @@ export function NotesContainer({ className }: { className?: string }) {
 			)}
 		>
 			{notes?.map((note) => (
-				<div key={note.id} className="break-inside-avoid mb-4">
+				<div
+					key={note.id}
+					className="inline-block w-full break-inside-avoid overflow-hidden mb-4"
+				>
 					<Note note={note} />
 				</div>
 			))}
