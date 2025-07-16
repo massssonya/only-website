@@ -2,14 +2,18 @@ import {
 	addNote,
 	deleteNote,
 	getNotes,
+	getDeletedNotes,
 	updateNote
 } from "@/shared/lib/data/mockNotes";
 import { Note } from "@/shared/types/note";
 import { NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
-export async function GET() {
-	return NextResponse.json(getNotes(), { status: 200 });
+export async function GET(req: Request) {
+	const { searchParams } = new URL(req.url);
+	const deleted = searchParams.get("deleted");
+	let notes = deleted ? getDeletedNotes() : getNotes();
+	return NextResponse.json(notes, { status: 200 });
 }
 
 export async function POST(req: Request) {

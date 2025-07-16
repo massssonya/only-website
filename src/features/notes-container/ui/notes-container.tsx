@@ -1,12 +1,19 @@
 "use client";
 
 import { Note } from "@/features/note/ui";
-import { fetchNotes } from "@/shared/api/notes";
+import { fetchDeletedNotes, fetchNotes } from "@/shared/api/notes";
+import { ROUTES } from "@/shared/config/routes";
 import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
 
 export function NotesContainer({ className }: { className?: string }) {
-	const {data: notes} = useQuery({queryKey: ["notes"], queryFn: fetchNotes})
+	const pathname = usePathname()
+	const isDeleted = pathname === ROUTES.DELETED.path
+	const { data: notes } = useQuery({
+		queryKey: [pathname],
+		queryFn: isDeleted ? fetchDeletedNotes : fetchNotes
+	})
 	return (
 		<div
 			className={clsx(

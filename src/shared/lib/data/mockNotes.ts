@@ -72,3 +72,8 @@ export function deleteNote(id: string) {
 	}
 	return null;
 }
+
+
+export function getDeletedNotes(){
+	return mockDeletedNotes;
+}
