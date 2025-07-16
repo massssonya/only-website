@@ -8,6 +8,14 @@ export async function fetchNotes(): Promise<Note[]> {
 	return res.json();
 }
 
+export async function fetchDeletedNotes(): Promise<Note[]> {
+	const res = await fetch("/api/notes?deleted=true");
+	if (!res.ok) {
+		throw new Error("Failed to fetch notes");
+	}
+	return res.json();
+}
+
 export async function createNote(data: Omit<Note, "id">): Promise<Note> {
 	const res = await fetch("/api/notes", {
 		method: "POST",

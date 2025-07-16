@@ -9,7 +9,7 @@ export default function DeletedPage() {
 					<button className="button text-blue-600 underline">Очистить корзину</button>
 				</div>
 
-				
+				<NotesContainer />
 			</div>
 		</main>
 	)
