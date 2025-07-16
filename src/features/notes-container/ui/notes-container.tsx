@@ -14,6 +14,7 @@ export function NotesContainer({ className }: { className?: string }) {
 		queryKey: ["notes", isDeleted ? "deleted" : "all"],
 		queryFn: isDeleted ? fetchDeletedNotes : fetchNotes
 	});
+
 	return (
 		<div
 			className={clsx(
@@ -26,7 +27,7 @@ export function NotesContainer({ className }: { className?: string }) {
 					key={note.id}
 					className="inline-block w-full break-inside-avoid overflow-hidden mb-4"
 				>
-					<Note note={note} />
+					<Note note={note} isDeleted={isDeleted} />
 				</div>
 			))}
 		</div>
