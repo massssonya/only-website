@@ -33,6 +33,8 @@ const mockNotes: Note[] = [
 	}
 ];
 
+let mockDeletedNotes: Note[] | [] = [];
+
 export function getNotes() {
 	return mockNotes;
 }
@@ -64,6 +66,7 @@ export function deleteNote(id: string) {
 	const index = mockNotes.findIndex((note) => note.id === id);
 	if (index !== -1) {
 		const deleted = mockNotes[index];
+		mockDeletedNotes = [...mockDeletedNotes, deleted];
 		mockNotes.splice(index, 1);
 		return deleted;
 	}

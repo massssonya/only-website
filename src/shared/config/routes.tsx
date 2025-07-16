@@ -1,4 +1,4 @@
-import { Home, Settings } from "@geist-ui/icons";
+import { Home, Settings, Trash } from "@geist-ui/icons";
 
 export const ROUTES = {
 	HOME: {
@@ -10,5 +10,10 @@ export const ROUTES = {
 		path: "/settings",
 		name: "Settings",
 		icon: <Settings />
+	},
+	DELETED: {
+		path: "/deleted",
+		name: "Deleted",
+		icon: <Trash />
 	}
 };
