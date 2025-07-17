@@ -2,6 +2,7 @@
 
 import { ROUTES } from "@/shared/config/routes";
 import { useSidebarOpen } from "@/shared/store";
+import { TransitionLink } from "@/shared/ui";
 
 import { ChevronRight } from "@geist-ui/icons";
 import Link from "next/link";
@@ -53,7 +54,7 @@ const LinkItemComponent = ({
 	isOpenSidebar,
 }: LinkItemProps) => {
 	return (
-		<Link
+		<TransitionLink
 			href={route.path}
 			key={route.name}
 			style={{
@@ -90,7 +91,7 @@ const LinkItemComponent = ({
 			>
 				{route.name}
 			</span>
-		</Link>
+		</TransitionLink>
 	);
 };
 
