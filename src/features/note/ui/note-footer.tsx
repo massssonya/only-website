@@ -15,15 +15,16 @@ export function NoteFooter({ noteId }: { noteId: Note["id"] }) {
 	const pathname = usePathname();
 	const { deleteNote } = useDeleteNote(noteId);
 	const menuItems: Record<Pathname, MenuItem[]> = {
-		"/deleted": [
-			{
-				label: "Восстановить заметку",
-				onClick: () => deleteNote()
-			}
-		],
 		"/": [
 			{
 				label: "Удалить заметку",
+				onClick: () => deleteNote()
+			}
+		],
+		"/deleted": [
+			{
+				label: "Восстановить заметку",
+				
 				onClick: () => console.log("восстановить заметку")
 			}
 		]

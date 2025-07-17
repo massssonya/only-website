@@ -1,15 +1,8 @@
 import clsx from "clsx";
-import {
-	Pin
-	// Archive,
-	// Image,
-	// UserPlus,
-	// Bell,
-	// Smile,
-} from "@geist-ui/icons";
+import { Pin } from "@geist-ui/icons";
 import type { Note } from "@/shared/types/note";
 import { usePinNote } from "../model";
-import { memo, useRef } from "react";
+import { memo, useCallback, useRef } from "react";
 import { NoteFooter } from "./note-footer";
 import { NoteHeader } from "./note-header";
 import { NoteText } from "./note-text";
@@ -26,10 +19,11 @@ const Note = memo(function Note({ note, className, isDeleted }: Props) {
 
 	const { togglePinNote } = usePinNote(note.id, isPinned);
 
-	const handleTogglePin = () => {
+	const handleTogglePin = useCallback(() => {
 		togglePinNote();
 		noteRef.current?.blur();
-	};
+	}, [note.id, isPinned]);
+
 	return (
 		<div
 			ref={noteRef}
@@ -39,7 +33,7 @@ const Note = memo(function Note({ note, className, isDeleted }: Props) {
 				className
 			)}
 		>
-			{note.header && <NoteHeader title={note.header} />}
+			<NoteHeader title={note.header} />
 			<NoteText text={note.text} />
 
 			{isDeleted ? null : (
