@@ -2,8 +2,9 @@ import {
 	addNote,
 	deleteNote,
 	getNotes,
+	updateNote,
 	getDeletedNotes,
-	updateNote
+	clearDeletedNotes,
 } from "@/shared/lib/data/mockNotes";
 import { Note } from "@/shared/types/note";
 import { NextResponse } from "next/server";
@@ -30,6 +31,17 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
+	const { searchParams } = new URL(req.url);
+	const deletedNotes = searchParams.get("deleted");
+	if (deletedNotes) {
+		try {
+			clearDeletedNotes();
+			return NextResponse.json(`Deleted notes clered`, { status: 200 });
+		} catch {
+			return NextResponse.json({ error: "Not found deleted notes" }, { status: 404 });
+		}
+
+	}
 	const body = await req.json();
 
 	const deleted = deleteNote(body.id);
