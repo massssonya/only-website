@@ -68,7 +68,7 @@ export function useCreateNote() {
 		const header = headerRef.current?.value.trim();
 		const text = textareaRef.current?.value.trim();
 		if (text) {
-			createMutation.mutate({ text, header });
+			createMutation.mutate({ text, header, pinned: false });
 		}
 	};
 

@@ -39,7 +39,7 @@ export function getNotes() {
 	return mockNotes;
 }
 
-export function getNote(id: string) {
+export function getNoteById(id: string) {
 	return mockNotes.find((note) => note.id === id);
 }
 
@@ -80,4 +80,14 @@ export function getDeletedNotes(){
 
 export function clearDeletedNotes(){
 	mockDeletedNotes = []
+}
+
+export function deleteDeletedNoteById(id: string){
+	const index = mockDeletedNotes.findIndex((note) => note.id === id);
+	if (index !== -1) {
+		const deleted = mockDeletedNotes[index];
+		mockDeletedNotes.splice(index, 1);
+		return deleted;
+	}
+	return null;
 }

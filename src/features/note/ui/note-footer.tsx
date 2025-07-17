@@ -3,6 +3,7 @@ import { MoreVertical } from "@geist-ui/icons";
 import { useDeleteNote } from "../model";
 import { Note } from "@/shared/types/note";
 import { usePathname } from "next/navigation";
+import { useRestoreNote } from "../model/use-restore-note";
 
 type MenuItem = {
 	label: string;
@@ -14,6 +15,7 @@ type Pathname = "/" | "/deleted";
 export function NoteFooter({ noteId }: { noteId: Note["id"] }) {
 	const pathname = usePathname();
 	const { deleteNote } = useDeleteNote(noteId);
+	const { restoreCurrentNote } = useRestoreNote(noteId)
 	const menuItems: Record<Pathname, MenuItem[]> = {
 		"/": [
 			{
@@ -24,8 +26,8 @@ export function NoteFooter({ noteId }: { noteId: Note["id"] }) {
 		"/deleted": [
 			{
 				label: "Восстановить заметку",
-				
-				onClick: () => console.log("восстановить заметку")
+
+				onClick: () => restoreCurrentNote()
 			}
 		]
 	};

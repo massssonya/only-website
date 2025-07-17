@@ -5,6 +5,8 @@ import {
 	updateNote,
 	getDeletedNotes,
 	clearDeletedNotes,
+	deleteDeletedNoteById,
+	getNoteById,
 } from "@/shared/lib/data/mockNotes";
 import { Note } from "@/shared/types/note";
 import { NextResponse } from "next/server";
@@ -12,21 +14,33 @@ import { v4 as uuidv4 } from "uuid";
 
 export async function GET(req: Request) {
 	const { searchParams } = new URL(req.url);
+	const id = searchParams.get("id");
 	const deleted = searchParams.get("deleted");
-	let notes = deleted ? getDeletedNotes() : getNotes();
+
+	if (id) {
+		const note = getNoteById(id);
+		if (!note) {
+			return NextResponse.json({ error: `Not found note with id ${id}` }, { status: 404 });
+		}
+		return NextResponse.json(note, { status: 200 });
+	}
+
+	const notes = deleted ? getDeletedNotes() : getNotes();
 	return NextResponse.json(notes, { status: 200 });
 }
 
 export async function POST(req: Request) {
 	const body = await req.json();
+	const isRestoreNote = !!body["id"]
 
 	const newNote: Note = {
-		id: uuidv4(),
+		id: isRestoreNote ? body.id : uuidv4(),
 		text: body.text,
 		header: body.header || undefined,
-		pinned: false
+		pinned: isRestoreNote ? body.pinned : false
 	};
 	addNote(newNote);
+	if (isRestoreNote) deleteDeletedNoteById(body.id);
 	return NextResponse.json(newNote, { status: 201 });
 }
 
