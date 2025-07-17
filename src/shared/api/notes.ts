@@ -11,9 +11,18 @@ export async function fetchNotes(): Promise<Note[]> {
 export async function fetchDeletedNotes(): Promise<Note[]> {
 	const res = await fetch("/api/notes?deleted=true");
 	if (!res.ok) {
-		throw new Error("Failed to fetch notes");
+		throw new Error("Failed to fetch deleted notes");
 	}
 	return res.json();
+}
+
+export async function clearDeletedNotes(): Promise<void> {
+	const res = await fetch("/api/notes?deleted=true", {
+		method: "DELETE"
+	});
+	if (!res.ok) {
+		throw new Error("Failed to clear deleted notes");
+	}
 }
 
 export async function createNote(data: Omit<Note, "id">): Promise<Note> {
