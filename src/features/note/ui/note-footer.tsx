@@ -12,10 +12,10 @@ type MenuItem = {
 
 type Pathname = "/" | "/deleted";
 
-export function NoteFooter({ noteId }: { noteId: Note["id"] }) {
+export function NoteFooter({ note }: { note: Note }) {
 	const pathname = usePathname();
-	const { deleteNote } = useDeleteNote(noteId);
-	const { restoreCurrentNote } = useRestoreNote(noteId)
+	const { deleteNote } = useDeleteNote(note.id);
+	const { restoreCurrentNote } = useRestoreNote(note)
 	const menuItems: Record<Pathname, MenuItem[]> = {
 		"/": [
 			{
@@ -31,6 +31,7 @@ export function NoteFooter({ noteId }: { noteId: Note["id"] }) {
 			}
 		]
 	};
+	
 	return (
 		<footer className="mt-3 flex justify-between text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out group-focus:opacity-100">
 			<div className="flex-1"></div>
