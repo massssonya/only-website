@@ -47,7 +47,7 @@ const Note = memo(function Note({ note, className, isDeleted }: Props) {
 					onClick={handleTogglePin}
 				/>
 			)}
-			<NoteFooter noteId={note.id} />
+			<NoteFooter note={note} />
 		</div>
 	);
 })
