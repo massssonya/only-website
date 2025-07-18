@@ -3,3 +3,14 @@
 .line {
 	@apply w-4 h-0.5 bg-black;
 }
+
+#header-page-name {
+	transition-property: opacity, transform;
+	transition-timing-function: ease-in-out;
+	transition-duration: 500ms;
+}
+
+.header-transition{
+	opacity: 0;
+	transform: translateX(20px);
+}

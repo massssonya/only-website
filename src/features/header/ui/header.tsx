@@ -13,7 +13,7 @@ export function Header() {
 		<header className="z-50 fixed top-0 left-0 h-16 bg-h w-full flex items-center justify-between px-4 py-2 border-b border-b-neutral-300">
 			<div className="flex items-center gap-4 w-2/12">
 				<Burger />
-				<div className="logo text-2xl font-tt-runs font-bold">
+				<div id="header-page-name" className="logo text-2xl font-tt-runs font-bold">
 					{route?.name}
 				</div>
 			</div>

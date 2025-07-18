@@ -22,7 +22,7 @@ export default function RootLayout({
 					<Header />
 					<div className="w-full h-[calc(100vh-4rem)] flex absolute top-16">
 						<Sidebar />
-						<div className="w-full h-full overflow-scroll px-4 py-3">
+						<div id="outlet" className="w-full h-full overflow-scroll px-4 py-3">
 							{children}
 						</div>
 					</div>

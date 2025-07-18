@@ -1,4 +1,4 @@
-"use client";
+
 
 import { CreateNoteForm } from "@/features/create-note-form/ui";
 import { NotesContainer } from "@/features/notes-container";

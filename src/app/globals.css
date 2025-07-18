@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @supports (-webkit-touch-callout: none) {
+
 	/* Safari-specific styles */
 	.transition-all {
 		-webkit-transition-property: all;
@@ -42,6 +43,18 @@ body {
 body {
 	@apply bg-[var(--h)] text-[var(--foreground)];
 	/* font-family: var(--font-tt-runs); */
+
+}
+
+#outlet {
+	transition-property: opacity, filter;
+	transition-timing-function: ease-in-out;
+	transition-duration: 500ms;
+}
+
+.page-transition{
+	opacity: 0;
+	filter: blur(12px);
 }
 
 .input,

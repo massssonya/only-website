@@ -16,9 +16,18 @@ export function TransitionLink({ children, href, ...props }: Props) {
 
     const handleTransition = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
         e.preventDefault();
-        await sleep(500);
-        router.push(href as string);
-        await sleep(500);
+        const outlet = document.getElementById("outlet");
+        const header = document.getElementById("header-page-name");
+        if(outlet && header){
+            outlet.classList.add("page-transition");
+            header.classList.add("header-transition");
+            await sleep(500);
+            router.push(href as string);
+            await sleep(500);
+            outlet.classList.remove("page-transition");
+            header.classList.remove("header-transition");
+        }
+        
     }
     return (
         <Link
